@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+*.egg-info/
+
+# macOS
+.DS_Store
+
+# IDEs
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# データベース（必要に応じて）
+*.db
+*.sqlite
+
+# 一時ファイル
+*.tmp
+*.bak
+*~
+

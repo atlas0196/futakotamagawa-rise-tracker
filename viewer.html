@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>二子玉川ライズ 中古マンション比較表</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --accent-primary: #3b82f6;
+            --accent-secondary: #8b5cf6;
+            --border-color: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --border-color: #334155;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans JP', sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, #e0e7ff 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInDown 0.6s ease;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .header .subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 2rem;
+            gap: 1rem;
+        }
+
+        .theme-toggle {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .table-container {
+            background: var(--bg-secondary);
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            animation: fadeInUp 0.6s ease;
+            margin-bottom: 2rem;
+        }
+
+        .table-header {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .table-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: var(--bg-primary);
+        }
+
+        th {
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-secondary);
+            border-bottom: 2px solid var(--border-color);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+        }
+
+        tbody tr:hover {
+            background: var(--bg-primary);
+            transform: scale(1.01);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        td {
+            padding: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .rank {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .property-id {
+            font-family: 'Courier New', monospace;
+            font-weight: 400;
+            color: var(--text-primary);
+        }
+
+        .price {
+            font-weight: 700;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        .unit-price {
+            color: var(--text-primary);
+            font-weight: 400;
+            font-size: 0.95rem;
+        }
+
+        .tsubo-price {
+            color: var(--accent-primary);
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .badge-east {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .badge-west {
+            background: #fce7f3;
+            color: #9f1239;
+        }
+
+        .badge-central {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .badge-reform-yes {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .badge-reform-no {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        [data-theme="dark"] .badge-east {
+            background: #1e3a8a;
+            color: #bfdbfe;
+        }
+
+        [data-theme="dark"] .badge-west {
+            background: #831843;
+            color: #fbcfe8;
+        }
+
+        [data-theme="dark"] .badge-central {
+            background: #14532d;
+            color: #bbf7d0;
+        }
+
+        [data-theme="dark"] .badge-reform-yes {
+            background: #064e3b;
+            color: #a7f3d0;
+        }
+
+        [data-theme="dark"] .badge-reform-no {
+            background: #7f1d1d;
+            color: #fecaca;
+        }
+
+        .links-container {
+            background: var(--bg-secondary);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .links-container h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .link-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            background: var(--bg-primary);
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+        }
+
+        .link-item:hover {
+            transform: translateX(8px);
+            border-color: var(--accent-primary);
+            box-shadow: var(--shadow);
+        }
+
+        .link-item a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            font-weight: 500;
+            margin-left: auto;
+        }
+
+        .link-item a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-info {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            animation: fadeInUp 1s ease;
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .contact-info p {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .contact-info strong {
+            display: inline-block;
+            min-width: 100px;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 1200px) {
+            table {
+                font-size: 0.85rem;
+            }
+            th, td {
+                padding: 0.75rem 0.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.75rem;
+            }
+            
+            .table-container {
+                overflow-x: auto;
+            }
+            
+            table {
+                min-width: 1000px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>二子玉川ライズ 中古マンション比較表</h1>
+            <p class="subtitle">作成日時: 2025年10月07日 00:07 | 自動検出: 7件</p>
+        </div>
+
+        <div class="controls">
+            <button class="theme-toggle" onclick="toggleTheme()">🌙 ダークモード切替</button>
+        </div>
+
+        <div class="table-container">
+            <div class="table-header">
+                <h2>📊 比較表（平米単価順）</h2>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>順位</th>
+                        <th>管理番号</th>
+                        <th>販売価格</th>
+                        <th>平米単価</th>
+                        <th>坪単価</th>
+                        <th>間取り</th>
+                        <th>専有面積</th>
+                        <th>棟名</th>
+                        <th>階数</th>
+                        <th>築年月</th>
+                        <th>向き</th>
+                        <th>リフォーム</th>
+                        <th>お気に入り</th>
+                        <th>担当者</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="rank">1位</span></td>
+                        <td><span class="property-id">C13252K32</span></td>
+                        <td><span class="price">15,800万円</span></td>
+                        <td><span class="unit-price">224.69万円/㎡</span></td>
+                        <td><span class="tsubo-price">741.5万円/坪</span></td>
+                        <td>2LDK</td>
+                        <td>70.32㎡</td>
+                        <td><span class="badge badge-east">イースト</span></td>
+                        <td>17/42</td>
+                        <td>2010年5月</td>
+                        <td>南東</td>
+                        <td><span class="badge badge-reform-no">無</span></td>
+                        <td>1</td>
+                        <td>行方</td>
+                    </tr>
+                    <tr>
+                        <td><span class="rank">2位</span></td>
+                        <td><span class="property-id">C48258711</span></td>
+                        <td><span class="price">15,280万円</span></td>
+                        <td><span class="unit-price">226.34万円/㎡</span></td>
+                        <td><span class="tsubo-price">746.9万円/坪</span></td>
+                        <td>2LDK</td>
+                        <td>67.51㎡</td>
+                        <td><span class="badge badge-west">ウエスト</span></td>
+                        <td>27/28</td>
+                        <td>2010年5月</td>
+                        <td>西</td>
+                        <td><span class="badge badge-reform-yes">有</span></td>
+                        <td>15</td>
+                        <td>山形</td>
+                    </tr>
+                    <tr>
+                        <td><span class="rank">3位</span></td>
+                        <td><span class="property-id">C1325X119</span></td>
+                        <td><span class="price">17,480万円</span></td>
+                        <td><span class="unit-price">237.44万円/㎡</span></td>
+                        <td><span class="tsubo-price">783.5万円/坪</span></td>
+                        <td>2LDK</td>
+                        <td>73.62㎡</td>
+                        <td><span class="badge badge-east">イースト</span></td>
+                        <td>16/42</td>
+                        <td>2010年7月</td>
+                        <td>北東</td>
+                        <td><span class="badge badge-reform-yes">有</span></td>
+                        <td>3</td>
+                        <td>小西</td>
+                    </tr>
+                    <tr>
+                        <td><span class="rank">4位</span></td>
+                        <td><span class="property-id">C13253741</span></td>
+                        <td><span class="price">18,900万円</span></td>
+                        <td><span class="unit-price">239.57万円/㎡</span></td>
+                        <td><span class="tsubo-price">790.6万円/坪</span></td>
+                        <td>3LDK</td>
+                        <td>78.89㎡</td>
+                        <td><span class="badge badge-west">ウエスト</span></td>
+                        <td>17/28</td>
+                        <td>2010年5月</td>
+                        <td>南東</td>
+                        <td><span class="badge badge-reform-yes">有</span></td>
+                        <td>32</td>
+                        <td>行方</td>
+                    </tr>
+                    <tr>
+                        <td><span class="rank">5位</span></td>
+                        <td><span class="property-id">C13259K25</span></td>
+                        <td><span class="price">18,980万円</span></td>
+                        <td><span class="unit-price">247.81万円/㎡</span></td>
+                        <td><span class="tsubo-price">817.8万円/坪</span></td>
+                        <td>3LDK</td>
+                        <td>76.59㎡</td>
+                        <td><span class="badge badge-central">セントラル</span></td>
+                        <td>5/28</td>
+                        <td>2010年5月</td>
+                        <td>南</td>
+                        <td><span class="badge badge-reform-yes">有</span></td>
+                        <td>4</td>
+                        <td>小西</td>
+                    </tr>
+                    <tr>
+                        <td><span class="rank">6位</span></td>
+                        <td><span class="property-id">CV623ZG20</span></td>
+                        <td><span class="price">19,800万円</span></td>
+                        <td><span class="unit-price">259.16万円/㎡</span></td>
+                        <td><span class="tsubo-price">855.2万円/坪</span></td>
+                        <td>2LDK</td>
+                        <td>76.40㎡</td>
+                        <td><span class="badge badge-east">イースト</span></td>
+                        <td>36/42</td>
+                        <td>2010年7月</td>
+                        <td>北</td>
+                        <td><span class="badge badge-reform-no">無</span></td>
+                        <td>10</td>
+                        <td>行方</td>
+                    </tr>
+                    <tr>
+                        <td><span class="rank">7位</span></td>
+                        <td><span class="property-id">C48259B69</span></td>
+                        <td><span class="price">22,500万円</span></td>
+                        <td><span class="unit-price">318.07万円/㎡</span></td>
+                        <td><span class="tsubo-price">1049.6万円/坪</span></td>
+                        <td>2LDK</td>
+                        <td>70.74㎡</td>
+                        <td><span class="badge badge-west">ウエスト</span></td>
+                        <td>16/28</td>
+                        <td>2010年5月</td>
+                        <td>西</td>
+                        <td><span class="badge badge-reform-yes">有</span></td>
+                        <td>6</td>
+                        <td>小西</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="links-container">
+            <h2>🔗 物件リンク一覧</h2>
+            <div class="link-item">
+                <span><strong>C13252K32</strong> - イースト 17/42 2LDK 70.32㎡</span>
+                <a href="https://www.livable.co.jp/mansion/C13252K32/" target="_blank">詳細を見る →</a>
+            </div>
+            <div class="link-item">
+                <span><strong>C48258711</strong> - ウエスト 27/28 2LDK 67.51㎡</span>
+                <a href="https://www.livable.co.jp/mansion/C48258711/" target="_blank">詳細を見る →</a>
+            </div>
+            <div class="link-item">
+                <span><strong>C1325X119</strong> - イースト 16/42 2LDK 73.62㎡</span>
+                <a href="https://www.livable.co.jp/mansion/C1325X119/" target="_blank">詳細を見る →</a>
+            </div>
+            <div class="link-item">
+                <span><strong>C13253741</strong> - ウエスト 17/28 3LDK 78.89㎡</span>
+                <a href="https://www.livable.co.jp/mansion/C13253741/" target="_blank">詳細を見る →</a>
+            </div>
+            <div class="link-item">
+                <span><strong>C13259K25</strong> - セントラル 5/28 3LDK 76.59㎡</span>
+                <a href="https://www.livable.co.jp/mansion/C13259K25/" target="_blank">詳細を見る →</a>
+            </div>
+            <div class="link-item">
+                <span><strong>CV623ZG20</strong> - イースト 36/42 2LDK 76.40㎡</span>
+                <a href="https://www.livable.co.jp/mansion/CV623ZG20/" target="_blank">詳細を見る →</a>
+            </div>
+            <div class="link-item">
+                <span><strong>C48259B69</strong> - ウエスト 16/28 2LDK 70.74㎡</span>
+                <a href="https://www.livable.co.jp/mansion/C48259B69/" target="_blank">詳細を見る →</a>
+            </div>
+        </div>
+
+        <div class="contact-info">
+            <h3>📞 問い合わせ先</h3>
+            <p><strong>会社:</strong> 東急リバブル 二子玉川センター</p>
+            <p><strong>電話:</strong> 0120-938-291（無料）</p>
+            <p><strong>営業時間:</strong> 10:00〜18:00</p>
+            <p><strong>定休日:</strong> 毎週火曜日・水曜日</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+
+        // ページロード時にテーマを復元
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        });
+    </script>
+</body>
+</html>
+
