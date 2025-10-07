@@ -31,6 +31,13 @@
 - タイムスタンプ付きファイル名で保存
 - HTMLビューアーで美しく表示
 
+### 📈 価格変遷追跡機能（v4）NEW!
+- 全履歴をJSON形式で保存
+- 価格変更、新規物件、販売終了を自動検出
+- 日次変更レポートを自動生成
+- 初出価格・最高値・最安値・累計変動額を記録
+- いつ、いくら値下げがあったか完全に追跡可能
+
 ## セットアップ
 
 ### 必要な環境
@@ -57,8 +64,11 @@ python3 scraper.py
 1. **物件自動検出**: シード物件から幅優先探索で全物件を発見
 2. **面積フィルタ**: 65㎡〜80㎡の物件のみを抽出
 3. **データ取得**: 各物件の詳細情報を取得
-4. **比較表生成**: `comparison_table_YYYYMMDD_HHMMSS.md` を作成
-5. **latest.md更新**: 最新データで更新
+4. **変更検出**: 前回データとの差分を検出（価格変更、新規物件、販売終了）
+5. **変更レポート生成**: `changes_YYYYMMDD.md` を作成（変更があった場合）
+6. **価格履歴保存**: `price_tracker.json` と `history/` に保存
+7. **比較表生成**: `comparison_table_YYYYMMDD_HHMMSS.md` を作成
+8. **latest.md更新**: 最新データで更新
 
 ### 手動指定モード
 
@@ -119,12 +129,17 @@ open viewer.html
 ```
 RISE/
 ├── README.md                      # このファイル
-├── REQUIREMENTS.md                # 要件定義書（HTMLビューアー仕様含む）
+├── REQUIREMENTS.md                # 要件定義書（全機能の仕様）
 ├── requirements.txt               # Pythonパッケージ依存関係
 ├── scraper.py                     # メインスクリプト
-├── viewer.html                    # HTMLビューアー（ブラウザー表示用）
+├── price_tracker.py               # 価格追跡モジュール（v4）
+├── index.html                     # HTMLビューアー（ブラウザー表示用）
 ├── latest.md                      # 最新の比較表（Markdown形式）
-└── comparison_table_*.md          # 生成された比較表（複数・タイムスタンプ付き）
+├── price_tracker.json             # 全物件の価格履歴（v4）
+├── history/                       # 日次スナップショット（v4）
+│   ├── 2025-10-07.json
+│   └── 2025-10-08.json
+└── changes_*.md                   # 日次変更レポート（v4）
 ```
 
 ## カスタマイズ
@@ -180,6 +195,13 @@ sorted_properties = sorted(valid_properties, key=lambda x: x.get('price_per_sqm'
 
 ## 更新履歴
 
+- 2025-10-07: v4 - 価格変遷追跡機能追加
+  - JSON形式で全価格履歴を保存
+  - 日次スナップショット保存
+  - 4種類の変更検出（価格、新規物件、販売終了、担当者）
+  - 自動変更レポート生成
+  - 初出価格・最高値・最安値の自動計算
+  
 - 2025-10-07: v3 - 物件自動検出機能追加
   - 幅優先探索（BFS）による全物件自動発見
   - 面積フィルタリング（65㎡〜80㎡）
