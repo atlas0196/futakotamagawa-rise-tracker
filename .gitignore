@@ -27,3 +27,13 @@ env/
 *.bak
 *~
 
+# 価格追跡データ（履歴もGitで管理してVercelに反映）
+# 以下のファイルは全てGitにコミットする
+# - price_tracker.json （価格履歴）
+# - history/ （日次スナップショット）
+# - changes_*.md （変更レポート）
+# - comparison_table_*.md （比較表アーカイブ）
+
+# 古い比較表ファイルは除外（latest.mdのみ保持）
+comparison_table_2*.md
+

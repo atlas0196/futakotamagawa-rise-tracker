@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-二子玉川ライズ 中古マンション比較表作成スクリプト v3
-自動物件検出機能追加
+二子玉川ライズ 中古マンション比較表作成スクリプト v4
+価格変遷追跡機能追加
 """
 
 import requests
@@ -11,6 +11,7 @@ from datetime import datetime
 from typing import Dict, List, Optional
 import time
 import sys
+from price_tracker import PriceTracker
 
 # 自動検出を有効にするかどうか
 AUTO_DISCOVER = True  # False にすると手動指定モードになる
@@ -394,9 +395,12 @@ def generate_comparison_table(properties: List[Dict]) -> str:
 def main():
     """メイン処理"""
     print("=" * 60)
-    print("二子玉川ライズ 中古マンション比較表作成 v3")
+    print("二子玉川ライズ 中古マンション比較表作成 v4")
     print("=" * 60)
     print()
+    
+    # 価格追跡モジュールを初期化
+    tracker = PriceTracker()
     
     headers = {
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
@@ -459,6 +463,37 @@ def main():
             if i < len(MANUAL_PROPERTY_URLS):
                 time.sleep(1)
     
+    # 変更検出
+    print("=" * 60)
+    print("変更検出中...")
+    changes = tracker.detect_changes(properties)
+    
+    has_changes = any(changes.values())
+    if has_changes:
+        print("✓ 変更を検出しました")
+        print(f"  - 価格変更: {len(changes['price_changes'])}件")
+        print(f"  - 新規物件: {len(changes['new_properties'])}件")
+        print(f"  - 販売終了: {len(changes['ended_properties'])}件")
+        print(f"  - 担当者変更: {len(changes['staff_changes'])}件")
+    else:
+        print("変更はありませんでした")
+    print("=" * 60)
+    print()
+    
+    # 変更レポートを生成
+    if has_changes:
+        change_report = tracker.generate_change_report(changes)
+        change_report_file = f"changes_{datetime.now().strftime('%Y%m%d')}.md"
+        with open(change_report_file, 'w', encoding='utf-8') as f:
+            f.write(change_report)
+        print(f"✓ 変更レポートを作成: {change_report_file}\n")
+        print(change_report)
+        print()
+    
+    # 価格履歴を保存
+    tracker.save_current_data(properties)
+    print("✓ 価格履歴を保存しました: price_tracker.json\n")
+    
     # 比較表を生成
     print("=" * 60)
     print("比較表を生成中...")
@@ -469,7 +504,12 @@ def main():
     with open(output_file, 'w', encoding='utf-8') as f:
         f.write(comparison_table)
     
+    # latest.md も更新
+    with open('latest.md', 'w', encoding='utf-8') as f:
+        f.write(comparison_table)
+    
     print(f"✓ 比較表を作成しました: {output_file}")
+    print(f"✓ latest.md を更新しました")
     print("=" * 60)
     print()
     print(comparison_table)

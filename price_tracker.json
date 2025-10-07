@@ -1,0 +1,156 @@
+{
+  "C13252K32": {
+    "history": [
+      {
+        "date": "2025-10-07",
+        "price": 15800,
+        "price_per_sqm": 224.68714448236634,
+        "price_per_tsubo": 741.4675767918089,
+        "area": 70.32
+      }
+    ],
+    "first_seen": "2025-10-07",
+    "initial_price": 15800,
+    "current_price": 15800,
+    "current_area": 70.32,
+    "max_price": 15800,
+    "min_price": 15800,
+    "total_change": 0,
+    "building": "イースト",
+    "floor": "17/42",
+    "madori": "2LDK",
+    "staff": "行方"
+  },
+  "C13253741": {
+    "history": [
+      {
+        "date": "2025-10-07",
+        "price": 18900,
+        "price_per_sqm": 239.57409050576751,
+        "price_per_tsubo": 790.5944986690329,
+        "area": 78.89
+      }
+    ],
+    "first_seen": "2025-10-07",
+    "initial_price": 18900,
+    "current_price": 18900,
+    "current_area": 78.89,
+    "max_price": 18900,
+    "min_price": 18900,
+    "total_change": 0,
+    "building": "ウエスト",
+    "floor": "17/28",
+    "madori": "3LDK",
+    "staff": "行方"
+  },
+  "C13259K25": {
+    "history": [
+      {
+        "date": "2025-10-07",
+        "price": 18980,
+        "price_per_sqm": 247.81303042172607,
+        "price_per_tsubo": 817.783000391696,
+        "area": 76.59
+      }
+    ],
+    "first_seen": "2025-10-07",
+    "initial_price": 18980,
+    "current_price": 18980,
+    "current_area": 76.59,
+    "max_price": 18980,
+    "min_price": 18980,
+    "total_change": 0,
+    "building": "セントラル",
+    "floor": "5/28",
+    "madori": "3LDK",
+    "staff": "小西"
+  },
+  "C1325X119": {
+    "history": [
+      {
+        "date": "2025-10-07",
+        "price": 17480,
+        "price_per_sqm": 237.4354794892692,
+        "price_per_tsubo": 783.5370823145884,
+        "area": 73.62
+      }
+    ],
+    "first_seen": "2025-10-07",
+    "initial_price": 17480,
+    "current_price": 17480,
+    "current_area": 73.62,
+    "max_price": 17480,
+    "min_price": 17480,
+    "total_change": 0,
+    "building": "イースト",
+    "floor": "16/42",
+    "madori": "2LDK",
+    "staff": "小西"
+  },
+  "C48258711": {
+    "history": [
+      {
+        "date": "2025-10-07",
+        "price": 15280,
+        "price_per_sqm": 226.33683898681676,
+        "price_per_tsubo": 746.9115686564952,
+        "area": 67.51
+      }
+    ],
+    "first_seen": "2025-10-07",
+    "initial_price": 15280,
+    "current_price": 15280,
+    "current_area": 67.51,
+    "max_price": 15280,
+    "min_price": 15280,
+    "total_change": 0,
+    "building": "ウエスト",
+    "floor": "27/28",
+    "madori": "2LDK",
+    "staff": "山形"
+  },
+  "C48259B69": {
+    "history": [
+      {
+        "date": "2025-10-07",
+        "price": 22500,
+        "price_per_sqm": 318.0661577608143,
+        "price_per_tsubo": 1049.618320610687,
+        "area": 70.74
+      }
+    ],
+    "first_seen": "2025-10-07",
+    "initial_price": 22500,
+    "current_price": 22500,
+    "current_area": 70.74,
+    "max_price": 22500,
+    "min_price": 22500,
+    "total_change": 0,
+    "building": "ウエスト",
+    "floor": "16/28",
+    "madori": "2LDK",
+    "staff": "小西"
+  },
+  "CV623ZG20": {
+    "history": [
+      {
+        "date": "2025-10-07",
+        "price": 19800,
+        "price_per_sqm": 259.16230366492147,
+        "price_per_tsubo": 855.2356020942407,
+        "area": 76.4
+      }
+    ],
+    "first_seen": "2025-10-07",
+    "initial_price": 19800,
+    "current_price": 19800,
+    "current_area": 76.4,
+    "max_price": 19800,
+    "min_price": 19800,
+    "total_change": 0,
+    "building": "イースト",
+    "floor": "36/42",
+    "madori": "2LDK",
+    "staff": "行方"
+  }
+}
