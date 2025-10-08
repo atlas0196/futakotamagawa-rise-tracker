@@ -449,6 +449,35 @@ property_data['favorite_count'] = favorite_count if favorite_count is not None e
 3. 新しい価格表記（例：千万円単位）が登場する可能性
 4. リフォーム情報の記載方法が変更される可能性
 
+## 自動更新設定（GitHub Actions）
+
+### 概要
+GitHub Actionsを使用して、毎日自動的にデータ更新を実行します。
+
+### 実行スケジュール
+- **毎日 午前9時（日本時間）**
+- UTC 0:00（cron: '0 0 * * *'）
+
+### 実行内容
+1. 物件自動検出（BFS）
+2. データ取得・面積フィルタ
+3. 価格変更検出
+4. HTMLとMarkdownの生成
+5. GitHubに自動commit & push
+6. Vercelが自動デプロイ
+
+### メリット
+- ✅ Macの起動不要
+- ✅ 完全自動化
+- ✅ 実行ログがGitHub上で確認可能
+- ✅ 手動実行も可能
+- ✅ 無料（GitHub Actionsの無料枠で十分）
+
+### ファイル
+- `.github/workflows/daily-update.yml`
+
+---
+
 ## 更新履歴
 
 ### v4 (2025年10月8日)

@@ -53,7 +53,30 @@ pip3 install -r requirements.txt
 
 ## 使い方
 
-### 基本的な実行（自動検出モード）
+### 毎日自動更新（GitHub Actions）⭐ 推奨
+
+**完全自動化**：Macを起動していなくても毎日自動更新されます。
+
+#### 設定方法
+
+1. GitHubリポジトリにpush（初回のみ）
+2. GitHub Actionsが自動的に有効化
+3. 毎日 **午前9時（日本時間）** に自動実行
+
+#### 手動実行
+
+GitHubリポジトリページで：
+1. 「Actions」タブをクリック
+2. 「Daily Data Update」を選択
+3. 「Run workflow」をクリック
+
+#### 実行ログの確認
+
+「Actions」タブで実行履歴とログを確認できます。
+
+---
+
+### 基本的な実行（ローカル・手動）
 
 ```bash
 python3 scraper.py

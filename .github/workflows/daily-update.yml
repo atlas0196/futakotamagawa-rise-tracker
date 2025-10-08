@@ -1,0 +1,65 @@
+name: Daily Data Update
+
+on:
+  schedule:
+    # 毎日 日本時間 午前9時（UTC 0:00）に実行
+    - cron: '0 0 * * *'
+  
+  # 手動実行も可能
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+      
+      - name: Run scraper
+        run: |
+          python scraper.py
+      
+      - name: Configure Git
+        run: |
+          git config --local user.name "GitHub Actions Bot"
+          git config --local user.email "actions@github.com"
+      
+      - name: Commit and push changes
+        run: |
+          git add -A
+          
+          # 変更があるかチェック
+          if git diff --staged --quiet; then
+            echo "変更なし - コミットをスキップ"
+          else
+            git commit -m "自動データ更新: $(date '+%Y-%m-%d %H:%M') JST"
+            git push
+            echo "✓ データ更新完了"
+          fi
+      
+      - name: Summary
+        run: |
+          echo "## 実行結果" >> $GITHUB_STEP_SUMMARY
+          echo "- 実行時刻: $(date '+%Y-%m-%d %H:%M:%S') UTC" >> $GITHUB_STEP_SUMMARY
+          echo "- ステータス: 完了 ✅" >> $GITHUB_STEP_SUMMARY
+          
+          # latest.mdから物件数を抽出
+          if [ -f latest.md ]; then
+            property_count=$(grep -o "管理番号" latest.md | wc -l | tr -d ' ')
+            echo "- 物件数: $property_count 件" >> $GITHUB_STEP_SUMMARY
+          fi
+
