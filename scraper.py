@@ -7,12 +7,15 @@
 import requests
 from bs4 import BeautifulSoup
 import re
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 from typing import Dict, List, Optional
 import time
 import sys
 from price_tracker import PriceTracker
 from html_generator import generate_html
+
+# 日本時間（JST）のタイムゾーン
+JST = timezone(timedelta(hours=9))
 
 # 自動検出を有効にするかどうか
 AUTO_DISCOVER = True  # False にすると手動指定モードになる
@@ -339,7 +342,7 @@ def generate_comparison_table(properties: List[Dict]) -> str:
     # Markdown表の作成
     output = []
     output.append("# 二子玉川ライズ 中古マンション比較表\n")
-    output.append(f"**作成日時**: {datetime.now().strftime('%Y年%m月%d日 %H:%M')}\n")
+    output.append(f"**作成日時**: {datetime.now(JST).strftime('%Y年%m月%d日 %H:%M')}\n")
     output.append("## 比較表（平米単価順）\n")
     
     # テーブルヘッダー
@@ -488,7 +491,7 @@ def main():
     # 変更レポートを生成
     if has_changes:
         change_report = tracker.generate_change_report(changes)
-        change_report_file = f"changes_{datetime.now().strftime('%Y%m%d')}.md"
+        change_report_file = f"changes_{datetime.now(JST).strftime('%Y%m%d')}.md"
         with open(change_report_file, 'w', encoding='utf-8') as f:
             f.write(change_report)
         print(f"✓ 変更レポートを作成: {change_report_file}\n")
@@ -505,7 +508,7 @@ def main():
     comparison_table = generate_comparison_table(properties)
     
     # ファイルに出力
-    output_file = f"comparison_table_{datetime.now().strftime('%Y%m%d_%H%M%S')}.md"
+    output_file = f"comparison_table_{datetime.now(JST).strftime('%Y%m%d_%H%M%S')}.md"
     with open(output_file, 'w', encoding='utf-8') as f:
         f.write(comparison_table)
     

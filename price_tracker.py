@@ -6,8 +6,11 @@
 
 import json
 import os
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 from typing import Dict, List, Optional, Tuple
+
+# 日本時間（JST = UTC+9）
+JST = timezone(timedelta(hours=9))
 
 
 class PriceTracker:
@@ -36,7 +39,7 @@ class PriceTracker:
     def save_current_data(self, properties: List[Dict]):
         """現在のデータを保存"""
         tracker_data = {}
-        today = datetime.now().strftime('%Y-%m-%d')
+        today = datetime.now(JST).strftime('%Y-%m-%d')
         
         for prop in properties:
             if 'error' in prop:
@@ -197,7 +200,7 @@ class PriceTracker:
     
     def generate_change_report(self, changes: Dict) -> str:
         """変更レポートをMarkdown形式で生成"""
-        today = datetime.now().strftime('%Y年%m月%d日')
+        today = datetime.now(JST).strftime('%Y年%m月%d日')
         
         lines = [
             f"# 変更検出レポート ({today})\n",

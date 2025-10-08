@@ -4,7 +4,7 @@ HTML比較表生成モジュール
 最新データでindex.htmlを動的に生成
 """
 
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 from typing import List, Dict
 
 
@@ -24,7 +24,9 @@ def generate_html(properties: List[Dict], total_discovered: int = 0) -> str:
     valid_properties = [p for p in properties if 'error' not in p and 'price_per_sqm' in p]
     sorted_properties = sorted(valid_properties, key=lambda x: x.get('price_per_sqm', float('inf')))
     
-    now = datetime.now()
+    # 日本時間（JST = UTC+9）で表示
+    jst = timezone(timedelta(hours=9))
+    now = datetime.now(jst)
     timestamp = now.strftime('%Y年%m月%d日 %H:%M')
     
     # HTMLテーブル行を生成
