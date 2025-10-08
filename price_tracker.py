@@ -315,3 +315,4 @@ if __name__ == "__main__":
     tracker.save_current_data(test_properties)
     print("\n✓ データ保存完了")
 
+
