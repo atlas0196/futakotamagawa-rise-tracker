@@ -30,6 +30,9 @@ def generate_html(properties: List[Dict], total_discovered: int = 0) -> str:
     # HTMLテーブル行を生成
     table_rows = []
     for i, prop in enumerate(sorted_properties, 1):
+        favorite = prop.get('favorite_count', 0)
+        favorite_display = str(favorite) if favorite else '-'
+        
         row = f"""                    <tr>
                         <td><span class="rank">{i}位</span></td>
                         <td><span class="property-id">{prop.get('kanri_no', '-')}</span></td>
@@ -43,7 +46,7 @@ def generate_html(properties: List[Dict], total_discovered: int = 0) -> str:
                         <td>{prop.get('built', '-')}</td>
                         <td>{prop.get('direction', '-')}</td>
                         <td><span class="badge badge-reform-{'yes' if prop.get('reform') == '有' else 'no'}">{prop.get('reform', '-')}</span></td>
-                        <td>{prop.get('favorite_count', '-')}</td>
+                        <td>{favorite_display}</td>
                         <td>{prop.get('staff', '-')}</td>
                     </tr>"""
         table_rows.append(row)

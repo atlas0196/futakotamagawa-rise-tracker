@@ -12,7 +12,7 @@
       "built": "2010年5月",
       "direction": "南東",
       "reform": "無",
-      "favorites": 3,
+      "favorite_count": 3,
       "staff": "行方",
       "price_per_sqm": 224.68714448236634,
       "price_per_tsubo": 741.4675767918089
@@ -28,7 +28,7 @@
       "built": "2010年5月",
       "direction": "南東",
       "reform": "有",
-      "favorites": 33,
+      "favorite_count": 33,
       "staff": "行方",
       "price_per_sqm": 239.57409050576751,
       "price_per_tsubo": 790.5944986690329
@@ -44,7 +44,7 @@
       "built": "2010年5月",
       "direction": "南",
       "reform": "有",
-      "favorites": 5,
+      "favorite_count": 6,
       "staff": "小西",
       "price_per_sqm": 247.81303042172607,
       "price_per_tsubo": 817.783000391696
@@ -60,7 +60,7 @@
       "built": "2010年7月",
       "direction": "北東",
       "reform": "有",
-      "favorites": 3,
+      "favorite_count": 3,
       "staff": "小西",
       "price_per_sqm": 237.4354794892692,
       "price_per_tsubo": 783.5370823145884
@@ -76,7 +76,7 @@
       "built": "2010年5月",
       "direction": "西",
       "reform": "有",
-      "favorites": 15,
+      "favorite_count": 15,
       "staff": "山形",
       "price_per_sqm": 226.33683898681676,
       "price_per_tsubo": 746.9115686564952
@@ -92,7 +92,7 @@
       "built": "2010年5月",
       "direction": "西",
       "reform": "有",
-      "favorites": 6,
+      "favorite_count": 6,
       "staff": "小西",
       "price_per_sqm": 318.0661577608143,
       "price_per_tsubo": 1049.618320610687
@@ -108,7 +108,7 @@
       "built": "2010年7月",
       "direction": "北",
       "reform": "無",
-      "favorites": 10,
+      "favorite_count": 10,
       "staff": "行方",
       "price_per_sqm": 259.16230366492147,
       "price_per_tsubo": 855.2356020942407

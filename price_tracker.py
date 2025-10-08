@@ -64,6 +64,7 @@ class PriceTracker:
                     'price_per_sqm': prop.get('price_per_sqm'),
                     'price_per_tsubo': prop.get('price_per_tsubo'),
                     'area': prop.get('area'),
+                    'favorite_count': prop.get('favorite_count'),
                 })
             
             # 統計情報を計算

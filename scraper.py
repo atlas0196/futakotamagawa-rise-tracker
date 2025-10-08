@@ -291,7 +291,7 @@ def scrape_property(url: str) -> Dict:
                 favorite_count = int(match.group(1))
                 break
         
-        property_data['favorites'] = favorite_count if favorite_count is not None else '-'
+        property_data['favorite_count'] = favorite_count if favorite_count is not None else 0
         
         # 担当者の抽出
         contact_section = soup.find('p', string=re.compile(r'私が担当'))
@@ -310,14 +310,6 @@ def scrape_property(url: str) -> Dict:
                 if text and not re.match(r'^[a-zA-Z]+$', text):  # ローマ字読みを除外
                     property_data['staff'] = text
                     break
-        
-        # お気に入り数の抽出（オプション）
-        favorite_elem = soup.find('span', class_=re.compile('favorite-count'))
-        if favorite_elem:
-            favorite_text = favorite_elem.get_text(strip=True)
-            favorite_match = re.search(r'(\d+)', favorite_text)
-            if favorite_match:
-                property_data['favorite_count'] = int(favorite_match.group(1))
         
         # 平米単価・坪単価の計算
         if 'price' in property_data and 'area' in property_data:
@@ -369,7 +361,7 @@ def generate_comparison_table(properties: List[Dict]) -> str:
             prop.get('built', '-'),
             prop.get('direction', '-'),
             prop.get('reform', '-'),
-            str(prop.get('favorites', '-')),
+            str(prop.get('favorite_count', '-')),
             prop.get('staff', '-'),
         ]
         output.append("| " + " | ".join(row) + " |")
