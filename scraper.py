@@ -12,6 +12,7 @@ from typing import Dict, List, Optional
 import time
 import sys
 from price_tracker import PriceTracker
+from html_generator import generate_html
 
 # 自動検出を有効にするかどうか
 AUTO_DISCOVER = True  # False にすると手動指定モードになる
@@ -310,6 +311,14 @@ def scrape_property(url: str) -> Dict:
                     property_data['staff'] = text
                     break
         
+        # お気に入り数の抽出（オプション）
+        favorite_elem = soup.find('span', class_=re.compile('favorite-count'))
+        if favorite_elem:
+            favorite_text = favorite_elem.get_text(strip=True)
+            favorite_match = re.search(r'(\d+)', favorite_text)
+            if favorite_match:
+                property_data['favorite_count'] = int(favorite_match.group(1))
+        
         # 平米単価・坪単価の計算
         if 'price' in property_data and 'area' in property_data:
             property_data['price_per_sqm'] = property_data['price'] / property_data['area']
@@ -407,6 +416,8 @@ def main():
     }
     
     # 物件URLを取得（自動検出 or 手動指定）
+    all_urls = []  # 発見した全物件のURL
+    
     if AUTO_DISCOVER:
         print("🔍 自動検出モード")
         all_urls = auto_discover_properties(SEED_URLS, headers)
@@ -449,6 +460,8 @@ def main():
         print("📝 手動指定モード")
         print(f"   対象: {len(MANUAL_PROPERTY_URLS)} 件")
         print()
+        
+        all_urls = MANUAL_PROPERTY_URLS
         
         # 各物件情報を取得
         properties = []
@@ -508,8 +521,14 @@ def main():
     with open('latest.md', 'w', encoding='utf-8') as f:
         f.write(comparison_table)
     
+    # index.html を生成
+    html_content = generate_html(properties, total_discovered=len(all_urls) if AUTO_DISCOVER else len(MANUAL_PROPERTY_URLS))
+    with open('index.html', 'w', encoding='utf-8') as f:
+        f.write(html_content)
+    
     print(f"✓ 比較表を作成しました: {output_file}")
     print(f"✓ latest.md を更新しました")
+    print(f"✓ index.html を更新しました")
     print("=" * 60)
     print()
     print(comparison_table)
