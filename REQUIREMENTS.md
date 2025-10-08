@@ -408,12 +408,16 @@ if 'building' not in property_data:
             property_data['building'] = 'イースト'
 ```
 
-#### 8. お気に入り登録数の取得
-**課題**: お気に入り数は「◯件 お気に入り」という形式で表示されるが、配置場所が可変  
-**対処法**: 複数のパターンで検索し、フォールバック戦略を実装
+#### 8. お気に入り数の抽出
+**課題**: お気に入り数の表示場所が特定しにくい  
+**対処法**: 3段階のフォールバック戦略
+
+1. パターン1: 「◯件 お気に入り」というテキストを検索
+2. パターン2: class名に「favorite」や「like」を含む要素を探す
+3. パターン3: ページ全体から正規表現で抽出
 
 ```python
-# パターン1: 「◯件 お気に入り」のような表記を直接探す
+# パターン1
 favorite_text = soup.find(string=re.compile(r'件\s*お気に入り'))
 if favorite_text:
     parent_text = favorite_text.parent.get_text(strip=True)
@@ -421,29 +425,14 @@ if favorite_text:
     if count_match:
         favorite_count = int(count_match.group(1))
 
-# パターン2: class名に「favorite」や「like」を含む要素を探す
-if favorite_count is None:
-    favorite_elems = soup.find_all(['span', 'div', 'p'], class_=re.compile(r'favorite|like', re.IGNORECASE))
-    for elem in favorite_elems:
-        text = elem.get_text(strip=True)
-        count_match = re.search(r'(\d+)\s*件', text)
-        if count_match and 'お気に入り' in text:
-            favorite_count = int(count_match.group(1))
-            break
-
-# パターン3: ページ全体のテキストから探す（最終手段）
-if favorite_count is None:
-    all_text = soup.get_text()
-    matches = re.finditer(r'(\d+)\s*件\s*お気に入り', all_text)
-    for match in matches:
-        favorite_count = int(match.group(1))
-        break
+# パターン2, 3も同様に実装
+property_data['favorite_count'] = favorite_count if favorite_count is not None else 0
 ```
 
-**重要**: 
-- 「30 回閲覧」と「1 件 お気に入り」が近接して表示されることがあるため、正規表現パターンの精度が重要
-- ハートアイコン（♥）の近くにある数値ではなく、明示的に「件 お気に入り」というテキストを含む数値を抽出すること
-- 取得できない場合は「-」を設定
+**注意**: 
+- キー名は `favorite_count` で統一（`favorites` ではない）
+- 取得できない場合は `0` として扱う
+- HTMLビューアーでは `0` の場合は `-` と表示
 
 ### レート制限への配慮
 **実装内容**: 物件間で1秒の待機時間（`time.sleep(1)`）を設定  
@@ -462,19 +451,31 @@ if favorite_count is None:
 
 ## 更新履歴
 
-### v4 (2025年10月7日)
+### v4 (2025年10月8日)
 **価格変遷追跡機能の実装**
 - 全履歴保存によるJSON方式の実装
 - 日付ごとの価格履歴を記録（price_tracker.json）
-- 日次スナップショット保存（history/）
+- 日次スナップショット保存（history/YYYY-MM-DD.json）
 - 4種類の変更検出（価格変更、新規物件、販売終了、担当者変更）
 - 自動変更レポート生成（changes_YYYYMMDD.md）
 - 初出価格・最高値・最安値・累計変動額を自動計算
+
+**HTML自動生成機能の実装**
+- `html_generator.py`モジュールの追加
+- スクリプト実行時に`index.html`を自動更新
+- タイムスタンプ、物件件数、お気に入り数を動的に反映
+- 手動でHTMLを編集する必要がなくなった
+
+**お気に入り数の取得**
+- 物件ページから「◯件 お気に入り」を自動抽出
+- 3つのパターンで探索（テキスト検索、クラス名検索、全体検索）
+- 比較表とHTMLビューアーの両方に表示
 
 **メリット:**
 - 販売価格の変遷を完全に追跡可能
 - 新規物件の自動検出
 - 「いつ」「いくら」値下げがあったか履歴で確認可能
+- 実行のたびに最新データでHTMLが自動更新
 - 将来的にグラフ化も可能
 
 ### v3 (2025年10月7日)
