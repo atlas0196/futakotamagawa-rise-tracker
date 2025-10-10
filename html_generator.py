@@ -137,27 +137,121 @@ def generate_html(properties: List[Dict], total_discovered: int = 0) -> str:
         }}
 
         .controls {{
-            display: flex;
-            justify-content: flex-end;
+            background: var(--bg-secondary);
+            border-radius: 1rem;
+            padding: 1.5rem;
             margin-bottom: 2rem;
-            gap: 1rem;
+            box-shadow: var(--shadow-lg);
+            animation: fadeInDown 0.8s ease;
         }}
 
-        .theme-toggle {{
-            background: var(--bg-secondary);
+        .controls-inner {{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }}
+
+        .filters {{
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: flex-end;
+        }}
+
+        .filter-group {{
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            min-width: 140px;
+        }}
+
+        .filter-group label {{
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding-left: 0.25rem;
+        }}
+
+        .filter-select {{
+            background: var(--bg-primary);
             border: 2px solid var(--border-color);
             color: var(--text-primary);
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
+            padding: 0.75rem 2.5rem 0.75rem 1rem;
+            border-radius: 0.75rem;
+            font-size: 0.95rem;
+            font-weight: 500;
             cursor: pointer;
-            font-size: 1rem;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%233b82f6' d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 12px;
+        }}
+
+        .filter-select:hover {{
+            border-color: var(--accent-primary);
+            background-color: var(--bg-secondary);
+            transform: translateY(-1px);
+        }}
+
+        .filter-select:focus {{
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+        }}
+
+        .button-group {{
+            display: flex;
+            gap: 0.75rem;
+        }}
+
+        .reset-button {{
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
             box-shadow: var(--shadow);
         }}
 
-        .theme-toggle:hover {{
+        .reset-button:hover {{
             transform: translateY(-2px);
             box-shadow: var(--shadow-lg);
+        }}
+
+        .reset-button:active {{
+            transform: translateY(0);
+        }}
+
+        .theme-toggle {{
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            border: none;
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow);
+            min-width: 60px;
+        }}
+
+        .theme-toggle:hover {{
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: var(--shadow-lg);
+        }}
+
+        .theme-toggle:active {{
+            transform: translateY(0);
         }}
 
         .table-container {{
@@ -429,7 +523,39 @@ def generate_html(properties: List[Dict], total_discovered: int = 0) -> str:
         </div>
 
         <div class="controls">
-            <button class="theme-toggle" onclick="toggleTheme()">🌙 ダークモード切替</button>
+            <div class="controls-inner">
+                <div class="filters">
+                    <div class="filter-group">
+                        <label for="filter-madori">間取り</label>
+                        <select id="filter-madori" class="filter-select" onchange="applyFilters()">
+                            <option value="">すべて</option>
+                            <option value="2LDK">2LDK</option>
+                            <option value="3LDK">3LDK</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="filter-building">棟名</label>
+                        <select id="filter-building" class="filter-select" onchange="applyFilters()">
+                            <option value="">すべて</option>
+                            <option value="イースト">イースト</option>
+                            <option value="ウエスト">ウエスト</option>
+                            <option value="セントラル">セントラル</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="filter-reform">リフォーム</label>
+                        <select id="filter-reform" class="filter-select" onchange="applyFilters()">
+                            <option value="">すべて</option>
+                            <option value="有">有</option>
+                            <option value="無">無</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="button-group">
+                    <button class="reset-button" onclick="resetFilters()">リセット</button>
+                    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+                </div>
+            </div>
         </div>
 
         <div class="table-container">
@@ -482,6 +608,62 @@ def generate_html(properties: List[Dict], total_discovered: int = 0) -> str:
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
             html.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
+        }}
+
+        function applyFilters() {{
+            const madoriFilter = document.getElementById('filter-madori').value;
+            const buildingFilter = document.getElementById('filter-building').value;
+            const reformFilter = document.getElementById('filter-reform').value;
+            
+            const rows = document.querySelectorAll('tbody tr');
+            let visibleCount = 0;
+            
+            rows.forEach((row, index) => {{
+                const cells = row.querySelectorAll('td');
+                
+                // 各セルから値を取得（インデックスは0始まり）
+                const madori = cells[5].textContent.trim();        // 間取り
+                const building = cells[7].textContent.trim();      // 棟名
+                const reform = cells[11].textContent.trim();       // リフォーム
+                
+                // フィルター条件をチェック
+                const madoriMatch = !madoriFilter || madori === madoriFilter;
+                const buildingMatch = !buildingFilter || building === buildingFilter;
+                const reformMatch = !reformFilter || reform === reformFilter;
+                
+                // すべての条件に一致する場合のみ表示
+                if (madoriMatch && buildingMatch && reformMatch) {{
+                    row.style.display = '';
+                    visibleCount++;
+                    
+                    // 順位を再計算
+                    cells[0].querySelector('.rank').textContent = visibleCount + '位';
+                }} else {{
+                    row.style.display = 'none';
+                }}
+            }});
+            
+            // 表示件数を更新
+            updateDisplayCount(visibleCount);
+        }}
+
+        function resetFilters() {{
+            document.getElementById('filter-madori').value = '';
+            document.getElementById('filter-building').value = '';
+            document.getElementById('filter-reform').value = '';
+            applyFilters();
+        }}
+
+        function updateDisplayCount(count) {{
+            const subtitle = document.querySelector('.subtitle');
+            const originalText = subtitle.textContent.split('|')[0].trim();
+            const totalCount = document.querySelectorAll('tbody tr').length;
+            
+            if (count === totalCount) {{
+                subtitle.textContent = originalText + ' | 自動検出: ' + count + '件';
+            }} else {{
+                subtitle.textContent = originalText + ' | 表示: ' + count + '/' + totalCount + '件';
+            }}
         }}
 
         // ページロード時にテーマを復元
