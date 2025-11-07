@@ -246,6 +246,14 @@
         "price_per_tsubo": 741.4675767918089,
         "area": 70.32,
         "favorite_count": 7
+      },
+      {
+        "date": "2025-11-07",
+        "price": 15800,
+        "price_per_sqm": 224.68714448236634,
+        "price_per_tsubo": 741.4675767918089,
+        "area": 70.32,
+        "favorite_count": 7
       }
     ],
     "first_seen": "2025-10-07",
@@ -502,6 +510,14 @@
       },
       {
         "date": "2025-11-06",
+        "price": 17480,
+        "price_per_sqm": 237.4354794892692,
+        "price_per_tsubo": 783.5370823145884,
+        "area": 73.62,
+        "favorite_count": 9
+      },
+      {
+        "date": "2025-11-07",
         "price": 17480,
         "price_per_sqm": 237.4354794892692,
         "price_per_tsubo": 783.5370823145884,
@@ -768,6 +784,14 @@
         "price_per_tsubo": 746.9115686564952,
         "area": 67.51,
         "favorite_count": 17
+      },
+      {
+        "date": "2025-11-07",
+        "price": 15280,
+        "price_per_sqm": 226.33683898681676,
+        "price_per_tsubo": 746.9115686564952,
+        "area": 67.51,
+        "favorite_count": 18
       }
     ],
     "first_seen": "2025-10-07",
@@ -1029,6 +1053,14 @@
         "price_per_tsubo": 1049.618320610687,
         "area": 70.74,
         "favorite_count": 11
+      },
+      {
+        "date": "2025-11-07",
+        "price": 22500,
+        "price_per_sqm": 318.0661577608143,
+        "price_per_tsubo": 1049.618320610687,
+        "area": 70.74,
+        "favorite_count": 11
       }
     ],
     "first_seen": "2025-10-07",
@@ -1042,6 +1074,52 @@
     "floor": "16/28",
     "madori": "2LDK",
     "staff": "小西"
+  },
+  "C4825XN07": {
+    "history": [
+      {
+        "date": "2025-11-07",
+        "price": 8480,
+        "price_per_sqm": 126.49164677804295,
+        "price_per_tsubo": 417.42243436754165,
+        "area": 67.04,
+        "favorite_count": 1
+      }
+    ],
+    "first_seen": "2025-11-07",
+    "initial_price": 8480,
+    "current_price": 8480,
+    "current_area": 67.04,
+    "max_price": 8480,
+    "min_price": 8480,
+    "total_change": 0,
+    "building": null,
+    "floor": "3/6",
+    "madori": "3LDK",
+    "staff": "宮坂"
+  },
+  "C4825XN24": {
+    "history": [
+      {
+        "date": "2025-11-07",
+        "price": 8180,
+        "price_per_sqm": 122.01670644391407,
+        "price_per_tsubo": 402.65513126491635,
+        "area": 67.04,
+        "favorite_count": 2
+      }
+    ],
+    "first_seen": "2025-11-07",
+    "initial_price": 8180,
+    "current_price": 8180,
+    "current_area": 67.04,
+    "max_price": 8180,
+    "min_price": 8180,
+    "total_change": 0,
+    "building": null,
+    "floor": "2/6",
+    "madori": "3LDK",
+    "staff": "宮坂"
   },
   "CV623ZG20": {
     "history": [
@@ -1290,6 +1368,14 @@
         "price_per_tsubo": 855.2356020942407,
         "area": 76.4,
         "favorite_count": 13
+      },
+      {
+        "date": "2025-11-07",
+        "price": 19800,
+        "price_per_sqm": 259.16230366492147,
+        "price_per_tsubo": 855.2356020942407,
+        "area": 76.4,
+        "favorite_count": 14
       }
     ],
     "first_seen": "2025-10-07",
