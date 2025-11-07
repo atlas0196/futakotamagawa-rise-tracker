@@ -63,3 +63,7 @@ jobs:
             echo "- 物件数: $property_count 件" >> $GITHUB_STEP_SUMMARY
           fi
 
+
+
+
+

@@ -81,3 +81,7 @@ echo "📊 ローカルで確認："
 echo "   open index.html"
 echo ""
 
+
+
+
+

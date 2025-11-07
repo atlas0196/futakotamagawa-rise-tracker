@@ -417,9 +417,9 @@ def main():
         print("🔍 自動検出モード")
         all_urls = auto_discover_properties(SEED_URLS, headers)
         
-        # 面積フィルタリング（まず全物件の情報を取得）
-        print("📏 面積フィルタリング中...")
-        print(f"   条件: {MIN_AREA}㎡ 〜 {MAX_AREA}㎡")
+        # 面積と棟名でフィルタリング（まず全物件の情報を取得）
+        print("📏 面積・棟名フィルタリング中...")
+        print(f"   条件: {MIN_AREA}㎡ 〜 {MAX_AREA}㎡ + 二子玉川ライズのみ")
         print()
         
         filtered_properties = []
@@ -429,12 +429,19 @@ def main():
             
             property_data = scrape_property(url)
             
-            # 面積でフィルタリング
+            # 面積と棟名でフィルタリング
             if 'area' in property_data:
                 area = property_data['area']
+                building = property_data.get('building', '')
+                
+                # 面積チェック
                 if MIN_AREA <= area < MAX_AREA:
-                    print(f"✓ {area:.2f}㎡ - 条件に合致")
-                    filtered_properties.append(property_data)
+                    # 棟名チェック（二子玉川ライズのみ）
+                    if building in ['イースト', 'ウエスト', 'セントラル']:
+                        print(f"✓ {area:.2f}㎡ {building} - 条件に合致")
+                        filtered_properties.append(property_data)
+                    else:
+                        print(f"✗ {area:.2f}㎡ 棟名なし - 二子玉川ライズ以外")
                 else:
                     print(f"✗ {area:.2f}㎡ - 範囲外")
             else:
