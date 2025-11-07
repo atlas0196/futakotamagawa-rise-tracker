@@ -1075,51 +1075,28 @@
     "madori": "2LDK",
     "staff": "小西"
   },
-  "C4825XN07": {
+  "C48259L95": {
     "history": [
       {
         "date": "2025-11-07",
-        "price": 8480,
-        "price_per_sqm": 126.49164677804295,
-        "price_per_tsubo": 417.42243436754165,
-        "area": 67.04,
-        "favorite_count": 1
+        "price": 23800,
+        "price_per_sqm": 283.26588907403,
+        "price_per_tsubo": 934.777433944299,
+        "area": 84.02,
+        "favorite_count": 6
       }
     ],
     "first_seen": "2025-11-07",
-    "initial_price": 8480,
-    "current_price": 8480,
-    "current_area": 67.04,
-    "max_price": 8480,
-    "min_price": 8480,
+    "initial_price": 23800,
+    "current_price": 23800,
+    "current_area": 84.02,
+    "max_price": 23800,
+    "min_price": 23800,
     "total_change": 0,
-    "building": null,
-    "floor": "3/6",
+    "building": "イースト",
+    "floor": "28/42",
     "madori": "3LDK",
-    "staff": "宮坂"
-  },
-  "C4825XN24": {
-    "history": [
-      {
-        "date": "2025-11-07",
-        "price": 8180,
-        "price_per_sqm": 122.01670644391407,
-        "price_per_tsubo": 402.65513126491635,
-        "area": 67.04,
-        "favorite_count": 2
-      }
-    ],
-    "first_seen": "2025-11-07",
-    "initial_price": 8180,
-    "current_price": 8180,
-    "current_area": 67.04,
-    "max_price": 8180,
-    "min_price": 8180,
-    "total_change": 0,
-    "building": null,
-    "floor": "2/6",
-    "madori": "3LDK",
-    "staff": "宮坂"
+    "staff": "田島"
   },
   "CV623ZG20": {
     "history": [
