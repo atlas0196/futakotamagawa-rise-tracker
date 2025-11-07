@@ -1,5 +1,5 @@
 {
-  "date": "2025-11-07",
+  "date": "2025-10-17",
   "properties": [
     {
       "url": "https://www.livable.co.jp/mansion/C13252K32/",
@@ -12,10 +12,42 @@
       "built": "2010年5月",
       "direction": "北東",
       "reform": "無",
-      "favorite_count": 7,
+      "favorite_count": 5,
       "staff": "行方",
       "price_per_sqm": 224.68714448236634,
       "price_per_tsubo": 741.4675767918089
+    },
+    {
+      "url": "https://www.livable.co.jp/mansion/C13253741/",
+      "kanri_no": "C13253741",
+      "price": 18900,
+      "madori": "3LDK",
+      "area": 78.89,
+      "building": "ウエスト",
+      "floor": "17/28",
+      "built": "2010年5月",
+      "direction": "南東",
+      "reform": "有",
+      "favorite_count": 34,
+      "staff": "行方",
+      "price_per_sqm": 239.57409050576751,
+      "price_per_tsubo": 790.5944986690329
+    },
+    {
+      "url": "https://www.livable.co.jp/mansion/C13259K25/",
+      "kanri_no": "C13259K25",
+      "price": 18980,
+      "madori": "3LDK",
+      "area": 76.59,
+      "building": "セントラル",
+      "floor": "5/28",
+      "built": "2010年5月",
+      "direction": "南",
+      "reform": "有",
+      "favorite_count": 12,
+      "staff": "小西",
+      "price_per_sqm": 247.81303042172607,
+      "price_per_tsubo": 817.783000391696
     },
     {
       "url": "https://www.livable.co.jp/mansion/C1325X119/",
@@ -28,7 +60,7 @@
       "built": "2010年7月",
       "direction": "北東",
       "reform": "有",
-      "favorite_count": 9,
+      "favorite_count": 6,
       "staff": "小西",
       "price_per_sqm": 237.4354794892692,
       "price_per_tsubo": 783.5370823145884
@@ -44,7 +76,7 @@
       "built": "2010年5月",
       "direction": "西",
       "reform": "有",
-      "favorite_count": 18,
+      "favorite_count": 15,
       "staff": "山形",
       "price_per_sqm": 226.33683898681676,
       "price_per_tsubo": 746.9115686564952
@@ -60,40 +92,10 @@
       "built": "2010年5月",
       "direction": "西",
       "reform": "有",
-      "favorite_count": 11,
+      "favorite_count": 9,
       "staff": "小西",
       "price_per_sqm": 318.0661577608143,
       "price_per_tsubo": 1049.618320610687
-    },
-    {
-      "url": "https://www.livable.co.jp/mansion/C4825XN07/",
-      "kanri_no": "C4825XN07",
-      "price": 8480,
-      "madori": "3LDK",
-      "area": 67.04,
-      "floor": "3/6",
-      "built": "2024年12月",
-      "direction": "南西",
-      "reform": "無",
-      "favorite_count": 1,
-      "staff": "宮坂",
-      "price_per_sqm": 126.49164677804295,
-      "price_per_tsubo": 417.42243436754165
-    },
-    {
-      "url": "https://www.livable.co.jp/mansion/C4825XN24/",
-      "kanri_no": "C4825XN24",
-      "price": 8180,
-      "madori": "3LDK",
-      "area": 67.04,
-      "floor": "2/6",
-      "built": "2024年12月",
-      "direction": "南西",
-      "reform": "無",
-      "favorite_count": 2,
-      "staff": "宮坂",
-      "price_per_sqm": 122.01670644391407,
-      "price_per_tsubo": 402.65513126491635
     },
     {
       "url": "https://www.livable.co.jp/mansion/CV623ZG20/",
@@ -106,7 +108,7 @@
       "built": "2010年7月",
       "direction": "北",
       "reform": "無",
-      "favorite_count": 14,
+      "favorite_count": 11,
       "staff": "行方",
       "price_per_sqm": 259.16230366492147,
       "price_per_tsubo": 855.2356020942407
