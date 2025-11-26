@@ -398,6 +398,14 @@
         "price_per_tsubo": 761.124694376528,
         "area": 73.62,
         "favorite_count": 10
+      },
+      {
+        "date": "2025-11-26",
+        "price": 16980,
+        "price_per_sqm": 230.64384678076607,
+        "price_per_tsubo": 761.124694376528,
+        "area": 73.62,
+        "favorite_count": 10
       }
     ],
     "first_seen": "2025-10-07",
@@ -806,6 +814,14 @@
       },
       {
         "date": "2025-11-25",
+        "price": 15280,
+        "price_per_sqm": 226.33683898681676,
+        "price_per_tsubo": 746.9115686564952,
+        "area": 67.51,
+        "favorite_count": 22
+      },
+      {
+        "date": "2025-11-26",
         "price": 15280,
         "price_per_sqm": 226.33683898681676,
         "price_per_tsubo": 746.9115686564952,
@@ -1224,6 +1240,14 @@
         "price_per_tsubo": 1049.618320610687,
         "area": 70.74,
         "favorite_count": 12
+      },
+      {
+        "date": "2025-11-26",
+        "price": 22500,
+        "price_per_sqm": 318.0661577608143,
+        "price_per_tsubo": 1049.618320610687,
+        "area": 70.74,
+        "favorite_count": 12
       }
     ],
     "first_seen": "2025-10-07",
@@ -1391,6 +1415,14 @@
         "price_per_tsubo": 934.777433944299,
         "area": 84.02,
         "favorite_count": 10
+      },
+      {
+        "date": "2025-11-26",
+        "price": 23800,
+        "price_per_sqm": 283.26588907403,
+        "price_per_tsubo": 934.777433944299,
+        "area": 84.02,
+        "favorite_count": 11
       }
     ],
     "first_seen": "2025-11-07",
@@ -1799,6 +1831,14 @@
       },
       {
         "date": "2025-11-25",
+        "price": 19800,
+        "price_per_sqm": 259.16230366492147,
+        "price_per_tsubo": 855.2356020942407,
+        "area": 76.4,
+        "favorite_count": 17
+      },
+      {
+        "date": "2025-11-26",
         "price": 19800,
         "price_per_sqm": 259.16230366492147,
         "price_per_tsubo": 855.2356020942407,
